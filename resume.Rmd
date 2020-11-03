@@ -1,0 +1,35 @@
+---
+title: "Chen Mo"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+![](images/Chen.jpeg)  
+
+# Education  
+
+* **Columbia University Mailman School of Public Health**   
+Master of Science, Biostatistic   
+expected June 2022   
+
+* **Tulane University**  
+Master of Science, Finance   
+06/2018-12/2019  
+
+* **Sichuan University**  
+BS in Financial Engineering  
+09/2013-07/2017  
+
+# Professional Experience   
+
+##### **Dongxing Securities Corporation Limited** 
+Assistant, Investment Department  
+02/2018-05/2018  
+
+* Assisted in contacting with target company, researched various resources and did surveys with all the customers and suppliers of the target company, and field visited some of the customers  
+* Helped solving Excel Spreadsheets problem with accountants, collected all the documents and data in the early stage.
+
+# Extracurricular Activities  
+
+# Additional Information

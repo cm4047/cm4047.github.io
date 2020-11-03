@@ -1,0 +1,27 @@
+---
+title: "Chen Mo"
+output: 
+  html_document:
+    toc: true
+    toc_float: true
+---
+This is a website about Chen Mo!
+![](images/MC.jpeg) 
+
+# Contact 
+
+Chen Mo  
+E-mail: cm4047@cumc.columbia.edu  
+Phone: +86-186-81660997
+
+# Resume  
+Know more about Chen Mo [here](resume.html)
+
+# Flexdashboard
+
+# Tips  
+*[theme style](https://bootswatch.com/3/)  
+*[font awesome](https://fontawesome.com/icons?from=io)
+
+
+
