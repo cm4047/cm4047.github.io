@@ -1,0 +1,80 @@
+---
+title: "NYC Restaurant Inspection Results"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+```
+
+```{r clean_data}
+data(rest_inspec)
+rest_df =
+  rest_inspec %>% 
+  select(boro, building, critical_flag, cuisine_description, score, grade) %>% 
+  filter(boro == "BRONX",
+         !is.na(grade),
+         !is.na(building),
+         grade %in% c("A", "B", "C"),
+         critical_flag %in% c("Critical", "Not Critical"),
+         score < 60
+  ) %>% 
+  mutate(
+        cuisine_description = recode(cuisine_description, "Chinese/Cuban" = "Chinese", "Chinese/Japanese" = "Chinese", "Hotdogs/Pretzels" = "Hotdogs", "Latin (Cuban, Dominican, Puerto Rican, South & Central American)" = "Latin", "Pizza/Italian" = "Pizza", "Sandwiches/Salads/Mixed Buffet" = "Sandwiches", "Soups & Sandwiches" = "Sandwiches", "CafÃ©/Coffee/Tea" = "Coffee")
+  )
+```
+         
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Scores distribution among different cuisine types
+
+```{r}
+rest_df %>%
+  mutate(
+    cu = cuisine_description
+  ) %>% 
+  plot_ly(y = ~score, x = ~ cu, type = "box", 
+          color = ~ cu, colors = "viridis")
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Numbers of restaurants among different scores
+
+```{r}
+rest_df %>%
+  mutate(score = as_factor(score)
+        ) %>% 
+  count(score) %>% 
+  mutate(
+    score = fct_reorder(score, n),
+    rating = str_c("Score:", score, "\nNumbers of restaurants:", n)
+  ) %>% 
+  plot_ly(x = ~ score, y = ~ n, type = "bar", color = ~ score, colors = "viridis", text = ~ rating)
+```
+
+
+### Frequency of different numbers of buildings 
+
+```{r}
+rest_df %>%
+  mutate(building = as_factor(building)
+        ) %>% 
+  count(building) %>% 
+  mutate(
+    building = fct_reorder(building, n),
+    rate_1 = str_c("Building Numbers:", building, "\nFrequency:", n)
+  ) %>% 
+  plot_ly(x = ~ building, y = ~ n, type = "scatter", mode = "markers", color = ~ building, colors = "viridis", text = ~ rate_1
+  )
+```
+

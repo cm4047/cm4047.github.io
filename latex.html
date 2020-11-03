@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Chen Mo" />
+
+
+<title>Latex Example</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/navigation-1.1/codefolding.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h2 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h3 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h4 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h5 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.section h6 {
+  padding-top: 65px;
+  margin-top: -65px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+<style type="text/css">
+.code-folding-btn { margin-bottom: 4px; }
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Home</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="resume.html">Resume</a>
+</li>
+<li>
+  <a href="flexdashboard.html">Flexdashboard</a>
+</li>
+<li>
+  <a href="latex.html">Latex Example</a>
+</li>
+<li>
+  <a href="mailto:&lt;cm4047@cumc.columbia.edu&gt;">
+    <span class="fa fa-envelope fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="http://github.com/cm4047/">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+<div class="btn-group pull-right">
+<button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span>Code</span> <span class="caret"></span></button>
+<ul class="dropdown-menu" style="min-width: 50px;">
+<li><a id="rmd-show-all-code" href="#">Show All Code</a></li>
+<li><a id="rmd-hide-all-code" href="#">Hide All Code</a></li>
+</ul>
+</div>
+
+
+
+<h1 class="title toc-ignore">Latex Example</h1>
+<h4 class="author">Chen Mo</h4>
+<h4 class="date">11/3/2020</h4>
+
+</div>
+
+
+<div id="problem-1" class="section level1">
+<h1>Problem 1</h1>
+<p>The event of interest is the cancer spread for women who have a high count of blood vessels in their breast tumors. The key probability terms mentioned in the problem and the mathematical formula is written below.</p>
+<p>Let <span class="math inline">\(D\)</span> denotes the event for women who get the cancers spread from breast tumors, Let <span class="math inline">\(D^c\)</span> denotes the event for women who do not get the cancers spread from breast tumors. Let <span class="math inline">\(E\)</span> denotes the event for women who have high counts of blood vessels in their breast tumors. Let <span class="math inline">\(E^c\)</span> denotes the event for women who have low counts of blood vessels in their breast tumors.</p>
+<p>From the given information, we can have <span class="math inline">\(P(E |D)= 0.85\)</span>, <span class="math inline">\(P(E^c | D^c)= 0.90\)</span>, and <span class="math inline">\(P(D) = 0.02\)</span>.<br />
+The probability of cancer spread given a high count of blood vessels in their breast tumors is <span class="math display">\[
+\begin{aligned}
+P(D|E)
+&amp;=\frac{P(D\cap E)}{P(E)}\\
+&amp;=\frac{P(E|D)P(D)}{P(E\cap \Omega)}\\
+&amp;=\frac{P(E|D)P(D)}{P(E\cap (D\cup D^c))}\\
+&amp;=\frac{P(E|D)P(D)}{P((E\cap D)\cup (E\cap D^c))}\\
+&amp;=\frac{P(E|D)P(D)}{P(E\cap D)+P (E\cap D^c)}\\
+&amp;=\frac{P(E|D)P(D)}{P(E| D)P(D)+P (E|D^c)P(D^c)}\\
+&amp;=\frac{0.85\times 0.02}{0.85\times 0.02+(1-0.9)\times (1-0.02)}\\
+&amp;= \frac{0.017}{0.017+0.098}\\
+&amp;\approx 0.1478
+\end{aligned}
+\]</span> Thus, the probability of cancer spread given a high count of blood vessels in breast tumors is approximately 0.1478</p>
+</div>
+<div id="problem-2" class="section level1">
+<h1>Problem 2</h1>
+<div id="section" class="section level3">
+<h3>1)</h3>
+<p>From the given information, I use two-sample independent t-test to do this test since there are two groups of different people.</p>
+<p>Let students who were tested with Mozart music during their midterms period be the sample group one and let students who were tested without Mozart music during their midterms period be the sample group two. To determine whether there is sufficient evidence to claim that listening to Mozart boosts the IQ scores, we need to determine whether the mean IQ scores for two population of two groups are same. Let <span class="math inline">\(X_{1i}\)</span> denotes the IQ scores of ith students in group one and <span class="math inline">\(X_{2j}\)</span> denotes the IQ scores of jth students in group two. <span class="math inline">\(\sigma^2_1\)</span> denotes the variance of IQ score of population for group one and <span class="math inline">\(\sigma^2_2\)</span> denotes the variance of IQ scores of population for group two. Let <span class="math inline">\(\mu_1\)</span> denotes the mean of IQ scores of population for group one and <span class="math inline">\(\mu_2\)</span> denotes the variance of IQ scores of population for group two.</p>
+<p>First, I use F-test to test the equality of variances. The hypotheses are <span class="math display">\[ 
+\begin{split}
+H_0 = \sigma^2_{1} = \sigma^2_{2} \\
+H_1 = \sigma^2_{1} \neq \sigma^2_{2} \\
+\end{split}
+\]</span> With significance level 10% pre-specified, the test statitsics is calculated as <span class="math display">\[
+F_{stat}= \frac {s^2_{1}}{s^2_{2}} \sim F_{n_1-1,n_2-1} \space  under \ the \ Null \\
+F_{stat}= \frac {s^2_{1}}{s^2_{2}} \sim F_{14,14} \space  under \ the \ Null \\
+F_{stat}= \frac {13.78^2}{12.58^2} = 1.198472
+\]</span> The critical values are computed as<br />
+<span class="math display">\[
+F_{crit1} = F_{n_1-1,n_2-1,1-\frac{\alpha}{2}}=F_{14,14,0.95}=2.483726\\
+F_{crit2} = F_{n_1-1,n_2-1,\frac{\alpha}{2}}=F_{14,14,0.05}=0.4026209
+\]</span></p>
+<p>Decision rules are below<br />
+<span class="math display">\[
+Reject \space H_0: if \space F_{stat} &gt; F_{n_1-1,n_2-1,1-\frac{\alpha}{2}} \space or \space F_{stat} &lt;F_{n_1-1,n_2-1,\frac{\alpha}{2}}\\
+Fail \space to \space reject \space H_0: if\space  F_{n_1-1,n_2-1,\frac{\alpha}{2}}\leq F_{stat}\leq \space  F_{n_1-1,n_2-1,1-\frac{\alpha}{2}}
+\]</span> Because <span class="math inline">\(F_{crit2}=0.4026209&lt;F_{stat}=1.198472 &lt; F_{crit1}=2.483726\)</span>, we fail to reject <span class="math inline">\(H_0\)</span> and conclude that there is not enough evidence to support a difference in the two population variances given the 10% significance level.</p>
+<p>Then I will assess the equality of mean, and the hypotheses are below<br />
+<span class="math display">\[
+\begin{aligned}
+H_0: \mu_1 = \mu_2\\
+H_1: \mu_1 &lt; \mu_2
+\end{aligned}
+\]</span> With significance level 0.05, compute the test statistic and critical value for t<br />
+<span class="math display">\[
+\begin{aligned}
+s
+&amp;= \sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}\\
+&amp;=\sqrt{\frac{(15-1)13.78^2+(15-1)12.58^2}{15+15-2}}\\
+&amp;=\sqrt{\frac{14\times13.78^2+14\times12.58^2}{15+15-2}}\\
+&amp;=13.19343\\
+t_{stat}
+&amp;= \frac{\mu_1-\mu_2}{s\sqrt{(\frac{1}{n_1}+\frac{1}{n_2})}} \sim t_{n_1+n_2-2} \space under \space H_0\\
+&amp;=\frac{112.93-118.07}{13.19343\sqrt{(\frac{1}{15}+\frac{1}{15})}}\\
+&amp;=-1.065546\\
+t_{crit}
+&amp;=t_{n_1+n_2-2, \alpha}\\
+&amp;=t_{15+15-2, \alpha}\\
+&amp;=t_{28,0.1}\\
+&amp;=-1.312527
+\end{aligned}
+\]</span></p>
+<p>Under the significance level <span class="math inline">\(\alpha = 0.1\)</span>, the decision rules are<br />
+<span class="math display">\[
+Reject \space H_0: \space if \space t_{stat} &lt; t_{n_1+n_2-2,\alpha}\\
+Fail \space to \space reject \space H_0: \space if \space t_{stat} \geq t_{n_1+n_2-2,\alpha}
+\]</span> Because <span class="math inline">\(t_{stat}=-1.065546 \geq t_{crit}=-1.312527\)</span>, we fail to reject <span class="math inline">\(H_0\)</span> and conclude that under the significance level 10%, there is not enough evidence to reject that the mean of IQ scores of two groups is same, which means there is no sufficient evidence to claim that listening to Mozart boosts the IQ scores.</p>
+</div>
+<div id="section-1" class="section level3">
+<h3>2)</h3>
+<p>The one-sided 90% confidence interval with unknown but equal variances for <span class="math inline">\(\mu_1-\mu_2\)</span> is<br />
+<span class="math display">\[
+(-\infty , \bar{X_1}-\bar{X_2}-t_{n_1+n_2-2,\alpha}\cdot s\cdot \sqrt{\frac{1}{n_1}+\frac{1}{n_2}})\\
+(-\infty , 112.9333-118.0667-t_{15+15-2,0.1}\times 13.19343\times \sqrt{\frac{1}{15}+\frac{1}{15}})\\
+(-\infty , 112.9333-118.0667-t_{28,0.1}\times 13.19343\times \sqrt{\frac{1}{15}+\frac{1}{15}})\\
+(-\infty ,1.189844)
+\]</span></p>
+<p>The interpretation of 90% confidence level is that we have 90% confidence that the true difference of mean of IQ scores for population of students who do not listen to Mozart music and population of students who listen to Mozart music during their midterms period will fall into the 90% confidence interval which is <span class="math inline">\((-\infty, 1.189844)\)</span>.</p>
+</div>
+</div>
+<div id="problem-3" class="section level1">
+<h1>Problem 3</h1>
+<div id="section-2" class="section level3">
+<h3>1)</h3>
+<p>Since the 2742 men is the entire population and it is normally distributed, the population follows <span class="math inline">\(Norm(\mu,\sigma^2)\)</span>, which is <span class="math inline">\(Norm(174,7.7^2)\)</span>.</p>
+<p>I use R to select a random sample with replacement of 16 men from population</p>
+<p>The corresponding mean of the population is 176.1059274</p>
+</div>
+<div id="section-3" class="section level3">
+<h3>2)</h3>
+<p>I use R to select 50 random sample with replacement of 16 men from population</p>
+<p>And the plot of the distribution of the 50 sample means is below <img src="latex_files/figure-html/unnamed-chunk-6-1.png" width="90%" /></p>
+</div>
+<div id="section-4" class="section level3">
+<h3>3)</h3>
+<p>According to the central limit theorem, we know that if the population distribution is normal (or sample size greater than 30), then the sampling distribution is approximately normal for all sample sizes. Since in this situation, the 2742 men is the population and the mean height of population is normally distributed, the mean height of mean of sample which is selected from the population will also be normally distributed. From the plot in part 2), we can see that the mean height of 50 samples which are randomly selected from the population of 2742 men is normally distributed, which supports the central limite theorem(CLT).</p>
+</div>
+</div>
+<div id="problem-4" class="section level1">
+<h1>Problem 4</h1>
+<div id="section-5" class="section level3">
+<h3>1)</h3>
+<p>Since there are three samples and I need to test if there is a significant difference in the mean ln(ERG) between three groups, I choose ANOVA methods to do the test.</p>
+<p>Let <span class="math inline">\(\mu_i\)</span> denotes the mean ln(ERG) for population of ith group. Since I need to test if there is a significant difference in the mean ln(ERG) between three group, the hypotheses are below<br />
+<span class="math display">\[
+\begin{aligned}
+&amp;H_0 : \mu_1 = \mu_2 = \mu_3(which \space means \space the \space means \space of \space ln(ERG) \space among \space three \space groups \space are \space equal)\\
+&amp;H_1:at \space least \space two\space  means\space are\space not\space equal(which \space means \space at \space least \space two \space means \space of \space ln(ERG) \space among \space three \space groups \space are \space not \space euqal )
+\end{aligned}
+\]</span> Between SS and Within SS is calculated as<br />
+<span class="math display">\[
+\begin{aligned}
+BetweenSS 
+&amp;= \sum_{i=1}^k\sum_{j=1}^{n_i}(\bar{y_i} - \bar{\bar{y}})^2\\
+&amp;=\sum_{i=1}^kn_i(\bar{y_i})^2-\frac{y..^2}{n}\\
+&amp;=(66\times0.91^2+34\times 0.34^2+25\times (-0.07)^2)-(66\times0.91+34\times0.34+25\times(-0.07))^2\\
+&amp;\approx 19.6529648\\
+Within~SS 
+&amp;= \sum_{i=1}^k\sum_{j=1}^{n_i}(y_{ij}-\bar{y_i})^2\\
+&amp;=\sum_{i=1}^k(n_i-1)s_i^2\\
+&amp;=(66-1)\times0.15^2+(34-1)\times0.23^2+(25-1)\times0.23^2\\
+&amp;\approx 4.4778
+\end{aligned}
+\]</span> With a 5% significance level, the test statistics and the critical value are calculated as<br />
+<span class="math display">\[
+\begin{aligned}
+F_{stat} 
+&amp;=\frac{Between \space SS/(k-1)}{Within \space SS/(n-k)}\sim F_{k-1,n-k}\space  distribution\space  under\space  H_0\\
+&amp;=\frac{Between \space SS/(3-1)}{Within \space SS/(66+34+25-3)}\sim F_{2,122}\space  distribution\space  under\space  H_0\\
+&amp;=\frac{19.6529648/2}{4.4778/122}\\
+&amp;\approx 267.7276459\\
+F_{crit} 
+&amp;= F_{k-1, n-k, 1-\alpha}=F_{2,122,0.95}=3.070512
+\end{aligned}
+\]</span> Decision rules are below <span class="math display">\[
+\begin{aligned}
+&amp;Reject\space H_0: if \space F_{stat}&gt;F_{k-1,n-k,1-\alpha}\\
+&amp;Fail\space to\space reject \space H_0: if F_{stat}\leq F_{k-1,n-k,1-\alpha}
+\end{aligned}
+\]</span> Since <span class="math inline">\(F{stat}\approx267.7276459&gt;F_{k-1,n-k,1-\alpha}=3.070512\)</span>, we reject <span class="math inline">\(H_0\)</span> and conclude that under a 5% significance level, we have enough evidence to say that not all mean ln(ERG) in three groups are equal, which means there is a significant difference in the mean ln(ERG) between three groups</p>
+</div>
+<div id="section-6" class="section level3">
+<h3>2)</h3>
+<p>The assumptions that need to be satisfied for this analysis are below<br />
+* There are at least three groups of interest.</p>
+<ul>
+<li><p>Three samples (ERG values of patients with different types of RP) are drawn independently from the underlying populations.</p></li>
+<li><p>Homoscedasticity: The variances of the three underlying population are equal (Variance of the ERG values for three sample groups do not depend on the sample).</p></li>
+<li><p>Normality: The distribution of the error terms are normal.</p></li>
+</ul>
+</div>
+<div id="section-7" class="section level3">
+<h3>3)</h3>
+<p>There are another two methods of performing pairwise comparisons between the three groups:</p>
+<ul>
+<li><p>Tukey’s method (controls for all pairwise comparisons and it is less conservative than Bonferroni)</p></li>
+<li><p>Bonferroni method (the most conservative method and the most stringent in declaring significance)</p></li>
+</ul>
+</div>
+</div>
+<div id="problem-5" class="section level1">
+<h1>Problem 5</h1>
+<div id="section-8" class="section level3">
+<h3>1)</h3>
+<p>I use r to create a dataset and clean the data</p>
+</div>
+<div id="section-9" class="section level3">
+<h3>2)</h3>
+<p>I use r to create a summary table of age, sex, race and education level by voting status(yes-no) in the 2018 elections.</p>
+<pre><code>## 
+## Table: Descriptive Statistics: Voting Status
+## 
+## |                           |  Did not vote (N=883)   |     Voted (N=1764)      |
+## |:--------------------------|:-----------------------:|:-----------------------:|
+## |age                        |                         |                         |
+## |-  Mean (SD)               |     46.661 (19.033)     |     53.330 (17.824)     |
+## |-  Median (Q1, Q3)         | 46.000 (30.000, 61.500) | 55.000 (39.000, 68.000) |
+## |-  Min - Max               |     18.000 - 85.000     |     18.000 - 85.000     |
+## |gender                     |                         |                         |
+## |-  Female                  |       442 (50.1%)       |       968 (54.9%)       |
+## |-  Male                    |       441 (49.9%)       |       796 (45.1%)       |
+## |race                       |                         |                         |
+## |-  White                   |       681 (77.1%)       |      1412 (80.0%)       |
+## |-  Black                   |       104 (11.8%)       |       250 (14.2%)       |
+## |-  Asian/Pacific Islander  |        80 (9.1%)        |        78 (4.4%)        |
+## |-  Multiracial             |        13 (1.5%)        |        17 (1.0%)        |
+## |-  American Indian/Alaskan |        5 (0.6%)         |        7 (0.4%)         |
+## |education                  |                         |                         |
+## |-  Bachelors               |       141 (16.0%)       |       448 (25.4%)       |
+## |-  High School/GED         |       322 (36.5%)       |       399 (22.6%)       |
+## |-  Some College            |       142 (16.1%)       |       275 (15.6%)       |
+## |-  Some School             |       117 (13.3%)       |        83 (4.7%)        |
+## |-  Associate Degree        |        78 (8.8%)        |       180 (10.2%)       |
+## |-  Masters                 |        62 (7.0%)        |       271 (15.4%)       |
+## |-  Doctoral                |        17 (1.9%)        |       106 (6.0%)        |
+## |-  No School               |        4 (0.5%)         |        2 (0.1%)         |</code></pre>
+</div>
+<div id="section-10" class="section level3">
+<h3>3)</h3>
+<p>Since I need to evaluate the associations between the voting status and race, I will calculate the proportion of voting status in different races and compare the proportion of voting status between different races groups. Different race groups represent different sample groups and there are 5 sample groups which is more than 2, thus, I will use Chi-squared test to do this test.<br />
+First, I make a <span class="math inline">\(5\times2\)</span> table which represents the voting number for race groups</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Race</th>
+<th align="right">Voted</th>
+<th align="right">Unvoted</th>
+<th align="right">Row_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">White</td>
+<td align="right">1412</td>
+<td align="right">681</td>
+<td align="right">2093</td>
+</tr>
+<tr class="even">
+<td align="left">Black</td>
+<td align="right">250</td>
+<td align="right">104</td>
+<td align="right">354</td>
+</tr>
+<tr class="odd">
+<td align="left">Asian/Pacific Islander</td>
+<td align="right">78</td>
+<td align="right">80</td>
+<td align="right">158</td>
+</tr>
+<tr class="even">
+<td align="left">Multiracial</td>
+<td align="right">17</td>
+<td align="right">13</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="left">American Indian/Alaskan</td>
+<td align="right">7</td>
+<td align="right">5</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">Column_Total</td>
+<td align="right">1764</td>
+<td align="right">883</td>
+<td align="right">2647</td>
+</tr>
+</tbody>
+</table>
+<p>Then, I will make a table which represents the expected value of the voting number for race groups</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Race</th>
+<th align="right">Voted</th>
+<th align="right">Unvoted</th>
+<th align="right">Row_total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">White</td>
+<td align="right">1394.806196</td>
+<td align="right">698.193804</td>
+<td align="right">2093</td>
+</tr>
+<tr class="even">
+<td align="left">Black</td>
+<td align="right">235.910843</td>
+<td align="right">118.089157</td>
+<td align="right">354</td>
+</tr>
+<tr class="odd">
+<td align="left">Asian/Pacific Islander</td>
+<td align="right">105.293540</td>
+<td align="right">52.706460</td>
+<td align="right">158</td>
+</tr>
+<tr class="even">
+<td align="left">Multiracial</td>
+<td align="right">19.992444</td>
+<td align="right">10.007556</td>
+<td align="right">30</td>
+</tr>
+<tr class="odd">
+<td align="left">American Indian/Alaskan</td>
+<td align="right">7.996978</td>
+<td align="right">4.003022</td>
+<td align="right">12</td>
+</tr>
+<tr class="even">
+<td align="left">Column_Total</td>
+<td align="right">1764.000000</td>
+<td align="right">883.000000</td>
+<td align="right">2647</td>
+</tr>
+</tbody>
+</table>
+<p>The expected value is calculated as<br />
+<span class="math display">\[
+E_{ij} = \frac{E_{i.}E_{.j}}{n..}
+\]</span> Let <span class="math inline">\(p_{ij}\)</span>denotes the proportion of voting status for ith row and jth column of the table above. The hypotheses are below<br />
+<span class="math display">\[
+\begin{aligned}
+&amp;H_0:p_{11} =p_{21}=p_{31}=p_{41}=p_{51} \space and \space p_{12} =p_{22}=p_{32}=p_{42}=p_{52}(which \space means \space the \space proportion \space of \space people \space voted \space are\\ 
+&amp;\space all \space equal \space among \space different \space races \space and \space the \space proportion \space of \space people \space did \space not \space not \space vote \space are \space equal \space among \space different \space races)\\
+&amp;H_1:not \space all \space proportions \space are \space equal
+\end{aligned}
+\]</span> Under the null and with 5% significance level, the Chi-Squared test statistic and critical value are calculated by<br />
+<span class="math display">\[
+\begin{aligned}
+\chi^2_{stat} 
+&amp;= \sum_i^{R}\sum_j^{C}\frac{(O_{ij}-E_{ij})^2}{E_{ij}} \sim \chi^2_{ (R-1)\times(C-1)},where~df = (R-1)\times(C-1)\\
+&amp;\approx 26.082\\
+\chi_{crit}^2 
+&amp;= \chi^2_{ (R-1)\times(C-1), 1-\alpha}\\
+&amp;= \chi^2_{ (5-1)\times(2-1), 1-0.05}\\
+&amp;= \chi^2_{ 4, 0.95}\\
+&amp;= 9.487729
+\end{aligned}
+\]</span></p>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  race_data
+## X-squared = 26.082, df = 4, p-value = 3.047e-05</code></pre>
+<p>Decision rules are below: <span class="math display">\[
+\begin{aligned}
+&amp;Reject \space H_0: if \space \chi_{stat}^2&gt;\chi^2_{(R-1)\times(C-1),1-\alpha}\\
+&amp;Fail\space to \space reject \space H_0: \space \chi_{stat}^2 \leq \chi_{(R-1)\times(C-1),1-\alpha}^2
+\end{aligned}
+\]</span> Since <span class="math inline">\(\chi_{stat}^2 \approx 26.082 &gt; \chi^2_{crit}=9.487729\)</span>, we can reject the <span class="math inline">\(H_0\)</span> and conclude that under the 95% significance level, the probability of voting status in different race groups are not equal, which means the proportion of voting status is significantly different by races.</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+<script>
+$(document).ready(function () {
+  window.initializeCodeFolding("hide" === "show");
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

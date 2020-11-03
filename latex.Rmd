@@ -1,0 +1,364 @@
+---
+title: "Latex Example"
+author: "Chen Mo"
+date: "11/3/2020"
+output: html_document
+---
+
+```{r setup, include = FALSE}
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(arsenal)
+library(dplyr)
+knitr::opts_chunk$set(
+	echo = FALSE,
+	message = FALSE,
+	warning = FALSE,
+	fig.width = 10, 
+        fig.asp = .6,
+        out.width = "90%"
+)
+theme_set(theme_minimal() + theme(legend.position = "bottom"))
+options(
+  ggplot2.continuous.colour = "viridis",
+  ggplot2.continuous.fill = "viridis"
+)
+scale_colour_discrete = scale_colour_viridis_d
+scale_fill_discrete = scale_fill_viridis_d
+```
+
+
+
+# Problem 1  
+The event of interest is the cancer spread for women who have a high count of blood vessels in their breast tumors. The key probability terms mentioned in the problem and the mathematical formula is written below.  
+
+Let $D$ denotes the event for women who get the cancers spread from breast tumors, Let $D^c$ denotes the event for women who do not get the cancers spread from breast tumors. Let $E$ denotes the event for women who have high counts of blood vessels in their breast tumors. Let $E^c$ denotes the event for women who have low counts of blood vessels in their breast tumors.  
+
+From the given information, we can have $P(E |D)= 0.85$, $P(E^c | D^c)= 0.90$, and $P(D) = 0.02$.  
+The probability of cancer spread given a high count of blood vessels in their breast tumors is 
+$$
+\begin{aligned}
+P(D|E)
+&=\frac{P(D\cap E)}{P(E)}\\
+&=\frac{P(E|D)P(D)}{P(E\cap \Omega)}\\
+&=\frac{P(E|D)P(D)}{P(E\cap (D\cup D^c))}\\
+&=\frac{P(E|D)P(D)}{P((E\cap D)\cup (E\cap D^c))}\\
+&=\frac{P(E|D)P(D)}{P(E\cap D)+P (E\cap D^c)}\\
+&=\frac{P(E|D)P(D)}{P(E| D)P(D)+P (E|D^c)P(D^c)}\\
+&=\frac{0.85\times 0.02}{0.85\times 0.02+(1-0.9)\times (1-0.02)}\\
+&= \frac{0.017}{0.017+0.098}\\
+&\approx 0.1478
+\end{aligned}
+$$
+Thus, the probability of cancer spread given a high count of blood vessels in breast tumors is approximately 0.1478  
+
+# Problem 2  
+### 1)  
+From the given information, I use two-sample independent t-test to do this test since there are two groups of different people.
+
+Let students who were tested with Mozart music during their midterms period be the sample group one and let students who were tested without Mozart music during their midterms period be the sample group two. To determine whether there is sufficient evidence to claim that listening to Mozart boosts the IQ scores, we need to determine whether the mean IQ scores for two population of two groups are same. Let $X_{1i}$ denotes the IQ scores of ith students in group one and $X_{2j}$ denotes the IQ scores of jth students in group two. $\sigma^2_1$ denotes the variance of IQ score of population for group one and $\sigma^2_2$ denotes the variance of IQ scores of population for group two. Let $\mu_1$ denotes the mean of IQ scores of population for group one and $\mu_2$ denotes the variance of IQ scores of population for group two. 
+
+First, I use F-test to test the equality of variances. 
+The hypotheses are 
+$$ 
+\begin{split}
+H_0 = \sigma^2_{1} = \sigma^2_{2} \\
+H_1 = \sigma^2_{1} \neq \sigma^2_{2} \\
+\end{split}
+$$
+With significance level 10% pre-specified, the test statitsics is calculated as 
+$$
+F_{stat}= \frac {s^2_{1}}{s^2_{2}} \sim F_{n_1-1,n_2-1} \space  under \ the \ Null \\
+F_{stat}= \frac {s^2_{1}}{s^2_{2}} \sim F_{14,14} \space  under \ the \ Null \\
+F_{stat}= \frac {13.78^2}{12.58^2} = 1.198472
+$$
+The critical values are computed as  
+$$
+F_{crit1} = F_{n_1-1,n_2-1,1-\frac{\alpha}{2}}=F_{14,14,0.95}=2.483726\\
+F_{crit2} = F_{n_1-1,n_2-1,\frac{\alpha}{2}}=F_{14,14,0.05}=0.4026209
+$$
+
+```{r}
+iq_no_mozart <- c(107, 120, 110, 95, 105, 110, 118, 136, 125, 111, 106, 140, 92, 99, 120)
+iq_mozart <- c(114, 126, 112, 103, 115, 120, 119, 133, 132, 109, 117, 143, 96, 105, 127)
+sd_no_mozart <- sd(iq_no_mozart)
+sd_mozart <- sd(iq_mozart)
+F_test <- sd_no_mozart^2/sd_mozart^2
+F_crit1 <- qf(0.95,14,14)
+F_crit2 <- qf(0.05,14,14)
+```
+Decision rules are below  
+$$
+Reject \space H_0: if \space F_{stat} > F_{n_1-1,n_2-1,1-\frac{\alpha}{2}} \space or \space F_{stat} <F_{n_1-1,n_2-1,\frac{\alpha}{2}}\\
+Fail \space to \space reject \space H_0: if\space  F_{n_1-1,n_2-1,\frac{\alpha}{2}}\leq F_{stat}\leq \space  F_{n_1-1,n_2-1,1-\frac{\alpha}{2}}
+$$
+Because $F_{crit2}=0.4026209<F_{stat}=1.198472 < F_{crit1}=2.483726$, we fail to reject $H_0$ and conclude that there is not enough evidence to support a difference in the two population variances given the 10% significance level.   
+
+Then I will assess the equality of mean, and the hypotheses are below  
+$$
+\begin{aligned}
+H_0: \mu_1 = \mu_2\\
+H_1: \mu_1 < \mu_2
+\end{aligned}
+$$
+With significance level 0.05, compute the test statistic and critical value for t  
+$$
+\begin{aligned}
+s
+&= \sqrt{\frac{(n_1-1)s_1^2+(n_2-1)s_2^2}{n_1+n_2-2}}\\
+&=\sqrt{\frac{(15-1)13.78^2+(15-1)12.58^2}{15+15-2}}\\
+&=\sqrt{\frac{14\times13.78^2+14\times12.58^2}{15+15-2}}\\
+&=13.19343\\
+t_{stat}
+&= \frac{\mu_1-\mu_2}{s\sqrt{(\frac{1}{n_1}+\frac{1}{n_2})}} \sim t_{n_1+n_2-2} \space under \space H_0\\
+&=\frac{112.93-118.07}{13.19343\sqrt{(\frac{1}{15}+\frac{1}{15})}}\\
+&=-1.065546\\
+t_{crit}
+&=t_{n_1+n_2-2, \alpha}\\
+&=t_{15+15-2, \alpha}\\
+&=t_{28,0.1}\\
+&=-1.312527
+\end{aligned}
+$$
+```{r}
+std_pooled <- sqrt(((sd_no_mozart^2*14) + (sd_mozart^2*14))/28)
+mean_no_mozart <- mean(iq_no_mozart)
+mean_mozart <- mean(iq_mozart)
+t_stats <- (mean_no_mozart - mean_mozart)/(std_pooled*sqrt((1/15) + (1/15)))
+t_crit <- qt(0.1,28)
+```
+Under the significance level $\alpha = 0.1$, the decision rules are  
+$$
+Reject \space H_0: \space if \space t_{stat} < t_{n_1+n_2-2,\alpha}\\
+Fail \space to \space reject \space H_0: \space if \space t_{stat} \geq t_{n_1+n_2-2,\alpha}
+$$
+Because $t_{stat}=-1.065546 \geq t_{crit}=-1.312527$, we fail to reject $H_0$ and conclude that under the significance level 10%, there is not enough evidence to reject that the mean of IQ scores of two groups is same, which means there is no sufficient evidence to claim that listening to Mozart boosts the IQ scores.  
+
+### 2)  
+The one-sided 90% confidence interval with unknown but equal variances for $\mu_1-\mu_2$ is  
+$$
+(-\infty , \bar{X_1}-\bar{X_2}-t_{n_1+n_2-2,\alpha}\cdot s\cdot \sqrt{\frac{1}{n_1}+\frac{1}{n_2}})\\
+(-\infty , 112.9333-118.0667-t_{15+15-2,0.1}\times 13.19343\times \sqrt{\frac{1}{15}+\frac{1}{15}})\\
+(-\infty , 112.9333-118.0667-t_{28,0.1}\times 13.19343\times \sqrt{\frac{1}{15}+\frac{1}{15}})\\
+(-\infty ,1.189844)
+$$
+```{r}
+res = t.test(iq_no_mozart,iq_mozart, alternative = c("less"),var.equal = TRUE, paired = FALSE, conf.level = 0.9)
+```
+The interpretation of 90% confidence level is that we have 90% confidence that the true difference of mean of IQ scores for population of students who do not listen to Mozart music and population of students who listen to Mozart music during their midterms period will fall into the 90% confidence interval which is $(-\infty, 1.189844)$.
+
+# Problem 3 
+### 1)
+Since the 2742 men is the entire population and it is normally distributed, the population follows $Norm(\mu,\sigma^2)$, which is $Norm(174,7.7^2)$.  
+  
+I use R to select a random sample with replacement of 16 men from population  
+```{r}
+set.seed(5)
+population <- rnorm(2742,174,7.7)
+sample_1 <- sample(population, 16, replace = TRUE)
+mean_1 <- mean(sample_1)
+```
+The corresponding mean of the population is `r mean_1`  
+
+### 2) 
+
+I use R to select 50 random sample with replacement of 16 men from population  
+```{r}
+set.seed(5)
+n = 50 
+sample_50 <- c()
+for (i in 1:n){
+   sample_50 <- c(sample_50, mean(sample(population, 16, replace = TRUE)))
+} 
+```
+And the plot of the distribution of the 50 sample means is below
+```{r}
+sample_df = tibble(
+        n = c(1:50),
+        sample_mean = sample_50
+)
+sample_df %>% 
+ggplot(aes(x = sample_mean, fill = "pur")) +
+        geom_histogram(binwidth = 0.2, position = "dodge") +
+        geom_density(alpha = .3, adjust = .1) + 
+        ggtitle("Sample Means for 50 samples")
+```
+
+### 3)  
+According to the central limit theorem, we know that if the population distribution is normal (or sample size greater than 30), then the sampling distribution is approximately normal for all sample sizes. Since in this situation, the 2742 men is the population and the mean height of population is normally distributed, the mean height of mean of sample which is selected from the population will also be normally distributed. From the plot in part 2), we can see that the mean height of 50 samples which are randomly selected from the population of 2742 men is normally distributed, which supports the central limite theorem(CLT).  
+
+# Problem 4  
+### 1)  
+Since there are three samples and I need to test if there is a significant difference in the mean ln(ERG) between three groups, I choose ANOVA methods to do the test.  
+
+Let $\mu_i$ denotes the mean ln(ERG) for population of ith group. Since I need to test if there is a significant difference in the mean ln(ERG) between three group, the hypotheses are below  
+$$
+\begin{aligned}
+&H_0 : \mu_1 = \mu_2 = \mu_3(which \space means \space the \space means \space of \space ln(ERG) \space among \space three \space groups \space are \space equal)\\
+&H_1:at \space least \space two\space  means\space are\space not\space equal(which \space means \space at \space least \space two \space means \space of \space ln(ERG) \space among \space three \space groups \space are \space not \space euqal )
+\end{aligned}
+$$
+Between SS and Within SS is calculated as  
+$$
+\begin{aligned}
+BetweenSS 
+&= \sum_{i=1}^k\sum_{j=1}^{n_i}(\bar{y_i} - \bar{\bar{y}})^2\\
+&=\sum_{i=1}^kn_i(\bar{y_i})^2-\frac{y..^2}{n}\\
+&=(66\times0.91^2+34\times 0.34^2+25\times (-0.07)^2)-(66\times0.91+34\times0.34+25\times(-0.07))^2\\
+&\approx 19.6529648\\
+Within~SS 
+&= \sum_{i=1}^k\sum_{j=1}^{n_i}(y_{ij}-\bar{y_i})^2\\
+&=\sum_{i=1}^k(n_i-1)s_i^2\\
+&=(66-1)\times0.15^2+(34-1)\times0.23^2+(25-1)\times0.23^2\\
+&\approx 4.4778
+\end{aligned}
+$$
+With a 5% significance level, the test statistics and the critical value are calculated as  
+$$
+\begin{aligned}
+F_{stat} 
+&=\frac{Between \space SS/(k-1)}{Within \space SS/(n-k)}\sim F_{k-1,n-k}\space  distribution\space  under\space  H_0\\
+&=\frac{Between \space SS/(3-1)}{Within \space SS/(66+34+25-3)}\sim F_{2,122}\space  distribution\space  under\space  H_0\\
+&=\frac{19.6529648/2}{4.4778/122}\\
+&\approx 267.7276459\\
+F_{crit} 
+&= F_{k-1, n-k, 1-\alpha}=F_{2,122,0.95}=3.070512
+\end{aligned}
+$$
+Decision rules are below
+$$
+\begin{aligned}
+&Reject\space H_0: if \space F_{stat}>F_{k-1,n-k,1-\alpha}\\
+&Fail\space to\space reject \space H_0: if F_{stat}\leq F_{k-1,n-k,1-\alpha}
+\end{aligned}
+$$
+Since $F{stat}\approx267.7276459>F_{k-1,n-k,1-\alpha}=3.070512$, we reject $H_0$ and conclude that under a 5% significance level, we have enough evidence to say that not all mean ln(ERG) in three groups are equal, which means there is a significant difference in the mean ln(ERG) between three groups  
+
+### 2)  
+The assumptions that need to be satisfied for this analysis are below  
+* There are at least three groups of interest.  
+
+* Three samples (ERG values of patients with different types of RP) are drawn independently from the underlying populations.  
+
+* Homoscedasticity: The variances of the three underlying population are equal (Variance of the ERG values for three sample groups do not depend on the sample).  
+
+* Normality: The distribution of the error terms are normal.  
+
+### 3)  
+
+There are another two methods of performing pairwise comparisons between the three groups:  
+
+* Tukey's method (controls for all pairwise comparisons and it is less conservative than Bonferroni)  
+
+* Bonferroni method (the most conservative method and the most stringent in declaring significance)
+
+# Problem 5   
+### 1)  
+I use r to create a dataset and clean the data  
+```{r}
+library(tidyverse)
+vote_df =
+        read_csv("VoteNY2018.csv") %>%
+        select(VOTED, AGE, SEX, RACESIMPLE, EDUSIMPLE) %>% 
+        rename(
+                age = AGE,
+                gender = SEX,
+                race = RACESIMPLE,
+                education = EDUSIMPLE,
+                voted = VOTED
+        ) %>% 
+        mutate(
+                gender = recode(gender, "1" = "Male", "2" = "Female", "9" = "NIU"),
+                race = recode(race, "1" = "White", "2" = "Black", "3" = "American Indian/Alaskan", "4" = "Asian/Pacific Islander", "5" = "Multiracial"),
+                education = recode(education, "0" = "No School", "1" = "Some School", "2" = "High School/GED", "3" = "Some College", "4" = "Associate Degree", "5" = "Bachelors", "6" = "Masters", "7" = "Doctoral"),
+                voted = recode(voted, "1" = "Did not vote", "2" = "Voted"),
+               
+        ) %>% 
+        mutate(
+                voted = as_factor(voted),
+                race = as_factor(race),
+                education = as_factor(education)
+                )
+```
+### 2)  
+I use r to create a summary table of age, sex, race and education level by voting status(yes-no) in the 2018 elections.
+```{r}
+my_control = tableby.control(
+        total = FALSE,
+        test = FALSE,
+        numeric.stats = c("meansd", "medianq1q3", "range"),
+        cat.stats = c("countpct"),
+        stats.labels = list(
+        meansd = "Mean (SD)",
+        medianq1q3 = "Median (Q1, Q3)",
+        range = "Min - Max",
+        countpct = "N (%)")
+)
+tab1  = tableby( voted ~ age + gender + race +education, data = vote_df, control = my_control)
+summary(tab1, title = "Descriptive Statistics: Voting Status", text=T)
+```
+### 3)  
+Since I need to evaluate the associations between the voting status and race, I will calculate the proportion of voting status in different races and compare the proportion of voting status between different races groups. Different race groups represent different sample groups and there are 5 sample groups which is more than 2, thus, I will use Chi-squared test to do this test.  
+First, I make a $5\times2$ table which represents the voting number for race groups  
+
+```{r}
+race_df = tibble(
+        Race = c("White","Black","Asian/Pacific Islander","Multiracial", "American Indian/Alaskan", "Column_Total"),
+        Voted = c(1412, 250, 78, 17, 7, 1764),
+        Unvoted = c(681, 104, 80, 13, 5, 883),
+        Row_total = c(2093, 354, 158, 30, 12, 2647)
+)
+knitr::kable(race_df)
+```
+Then, I will make a table which represents the expected value of the voting number for race groups  
+```{r}
+expected_df = tibble(
+        Race = c("White","Black","Asian/Pacific Islander","Multiracial", "American Indian/Alaskan", "Column_Total"),
+        Voted = c(2093*1764/2647, 354*1764/2647, 158*1764/2647, 30*1764/2647, 12*1764/2647, 1764),
+        Unvoted = c(2093*883/2647, 354*883/2647, 158*883/2647, 30*883/2647, 12*883/2647, 883),
+        Row_total = c(2093, 354, 158, 30, 12, 2647)
+)
+knitr::kable(expected_df)
+```
+The expected value is calculated as  
+$$
+E_{ij} = \frac{E_{i.}E_{.j}}{n..}
+$$
+Let $p_{ij}$denotes the proportion of voting status for ith row and jth column of the table above. The hypotheses are below  
+$$
+\begin{aligned}
+&H_0:p_{11} =p_{21}=p_{31}=p_{41}=p_{51} \space and \space p_{12} =p_{22}=p_{32}=p_{42}=p_{52}(which \space means \space the \space proportion \space of \space people \space voted \space are\\ 
+&\space all \space equal \space among \space different \space races \space and \space the \space proportion \space of \space people \space did \space not \space not \space vote \space are \space equal \space among \space different \space races)\\
+&H_1:not \space all \space proportions \space are \space equal
+\end{aligned}
+$$
+Under the null and with 5% significance level, the Chi-Squared test statistic and critical value are calculated by  
+$$
+\begin{aligned}
+\chi^2_{stat} 
+&= \sum_i^{R}\sum_j^{C}\frac{(O_{ij}-E_{ij})^2}{E_{ij}} \sim \chi^2_{ (R-1)\times(C-1)},where~df = (R-1)\times(C-1)\\
+&\approx 26.082\\
+\chi_{crit}^2 
+&= \chi^2_{ (R-1)\times(C-1), 1-\alpha}\\
+&= \chi^2_{ (5-1)\times(2-1), 1-0.05}\\
+&= \chi^2_{ 4, 0.95}\\
+&= 9.487729
+\end{aligned}
+$$
+```{r}
+race_data<-matrix(c(1412, 681, 250, 104, 78, 80, 17, 13, 7, 5), nrow=5,ncol=2,byrow=T,
+                  dimnames=list(c("White","Black","Asian/Pacific Islander","Multiracial", "American Indian/Alaskan"), 
+                                c("Voted","Did not voted")))
+chisq.test(race_data)
+chisq_crit = qchisq(0.95,4)
+```
+Decision rules are below:
+$$
+\begin{aligned}
+&Reject \space H_0: if \space \chi_{stat}^2>\chi^2_{(R-1)\times(C-1),1-\alpha}\\
+&Fail\space to \space reject \space H_0: \space \chi_{stat}^2 \leq \chi_{(R-1)\times(C-1),1-\alpha}^2
+\end{aligned}
+$$
+Since $\chi_{stat}^2 \approx 26.082 > \chi^2_{crit}=9.487729$, we can reject the $H_0$ and conclude that under the 95% significance level, the probability of voting status in different race groups are not equal, which means the proportion of voting status is significantly different by races.
+
