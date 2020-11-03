@@ -7,29 +7,108 @@ output:
 ---
 ![](images/Chen.jpeg)  
 
-# Education  
+# Education 
 
-* **Columbia University Mailman School of Public Health**   
+### **Columbia University Mailman School of Public Health**   
 Master of Science, Biostatistic   
 expected June 2022   
 
-* **Tulane University**  
+### **Tulane University**    
 Master of Science, Finance   
 06/2018-12/2019  
 
-* **Sichuan University**  
+### **Sichuan University**  
 BS in Financial Engineering  
 09/2013-07/2017  
 
 # Professional Experience   
 
-##### **Dongxing Securities Corporation Limited** 
+### **Novo Nordisk**  
+Intern, Data Scientist Assistant  
+05/2019-08/2019  
+
+* Assisted in writing, documenting and maintaining code in R, Python and SQL (also on Spark) to visualize and analyze data, and continuously deliver results.  
+* Assisted in providing advice to development plans with a statistical perspective, input to trial designs and protocols, support the creation of trial reports, summary documents, publications.  
+* Involved in presentations and discussions of results both internally and externally and participate in meetings.  
+* Responsible for communicating statistical results and findings both internally and in external publications.  
+
+### **DiDi Chuxing**  
+Intern, Product Analyst  
+03/2018-06/2018  
+
+* Managed end-to-end product analytics workflow; defined success and performance metrics for projects, and created actionable dashboards and visualization reports and presented to team on weekly basis.    
+* Mined and analyzed data at the customer level using SQL and R, identified product opportunities and created or iterated product based on the analysis of historical data and customer behavior.   
+* Cooperated with both technical and non-technical expertise, analyzed ambiguous problems and formulated hypotheses into actionable and well-designed A/B tests, closely monitored and analyzed experiments quantitative results; continually developed strategic plans for further improvement. 
+
+### **Sichuan Changhong Electric Co.,Ltd.**  
+Analyst, Corporate Investment Department  
+07/2017-12/2017  
+
+* Assisted in analyzing early stage case on Apex Digital, researched various resources including international websites and company filings to create investment memo.  
+* Exploited Excel Spreadsheets to calculate multiple target companies’ financial ratios concerning solvency, liquidity and profitability; gained practical knowledge of financial statement analysis.   
+* Engaged in several important meetings with the senior management team of potential acquisition targets, Developed comprehensive knowledge of merger & acquisition, corporate strategy, electric manufacturing industry and European/Southeast Asian markets.  
+
+
+### **Dongxing Securities Corporation Limited**  
 Assistant, Investment Department  
-02/2018-05/2018  
+01/2016-02/2016  
 
 * Assisted in contacting with target company, researched various resources and did surveys with all the customers and suppliers of the target company, and field visited some of the customers  
-* Helped solving Excel Spreadsheets problem with accountants, collected all the documents and data in the early stage.
+* Helped solving Excel Spreadsheets problem with accountants, collected all the documents and data in the early stage.  
 
-# Extracurricular Activities  
+# Extracurricular Activities   
 
-# Additional Information
+### **CATWALK Fashion Society, Ulink College of International**  
+President  
+01/2019-03/2019  
+
+* Lead a team growing from 7 people to over 20 people; coordinated with school authorities and sponsors, planned and launched year-round training sessions and performing events. 
+* Organized fashion shows at the annual College Gala, Art Festival that attracted over 300 attendees each.
+* Awarded Top 15 Candidates of Miss Chinese Cosmos Pageant– South Division.  
+
+### **Volleyball Team, School of Finance, Sichuan University**  
+Member  
+10/2013-05/2016  
+
+* Participated in weekly training to improve volleyball techniques and collaborative skills.  
+* Enhanced strong team working skills and nurtured camaraderie among team members by competing with teams from other schools.  
+
+### **Parcel of Love Volunteering Services**  
+Volunteer  
+07/2015-07/2016  
+
+* Volunteered twice a week to participate in marketing campaigns to help collect money or grocery donations for the Parcel of Love from various resources, and successfully collected RMB 2000+.  
+* Communicated with pedestrians to introduce the volunteering program of Parcel of Love and successfully persuaded five people to donate to the program.  
+
+
+### **Team Leader of United Sates Interdisciplinary Contest in Modeling**  
+### **Team Leader of China Undergraduate Mathematical Contest in Modeling**  
+
+# Others  
+
+### **Language**  
+
+* Mandarin (native)   
+* English (business proficient)  
+* Korean (elementary)  
+
+### **Standardized Test**  
+
+* GRE 330 (V160/86%+Q170/96%)   
+
+### **Statistical Tools & Programming Skills**  
+
+* R  
+* Python  
+* SQL  
+* E-Views  
+* C Programming  
+* Matlab   
+
+### **Hobbies**  
+
+* Volleyball  
+* Drawing  
+* Traveling  
+
+
